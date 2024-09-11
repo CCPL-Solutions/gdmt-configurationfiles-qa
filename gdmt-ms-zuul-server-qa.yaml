@@ -1,0 +1,45 @@
+server:
+  port: 8090
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://gdmt-ms-eureka-server:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 10000
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+zuul:
+  routes:
+    gdmt-ms-identitymanagement-neg:
+      service-id: gdmt-ms-identitymanagement-neg
+      path: /gdmt-ms-identitymanagement-neg/**
+
+    gdmt-ms-logicalfolders-neg:
+      service-id: gdmt-ms-logicalfolders-neg
+      path: /gdmt-ms-logicalfolders-neg/**
+
+    gdmt-ms-retentionschedules-neg:
+      service-id: gdmt-ms-retentionschedules-neg
+      path: /gdmt-ms-retentionschedules-neg/**
+
+    gdmt-ms-oauth2-server:
+      service-id: gdmt-ms-oauth2-server
+      path: /gdmt-ms-oauth2-server/**
+      sensitive-headers: Cookie,Set-Cookie

@@ -1,0 +1,47 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://gdmt-ms-eureka-server:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 10000
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      show-sql: true
+  datasource:
+    password: ${gdmt.datasource.password}
+    username: ${gdmt.datasource.username}
+    url: ${gdmt.datasource.url}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+data-provider:
+  rest:
+    gdmt-ms-identitymanagement-neg:
+      baseUrl: http://gdmt-ms-identitymanagement-neg-re-v1-0/api/v1.0
+      urlFindUserByUserName: ${data-provider.rest.gdmt-ms-identitymanagement-neg.baseUrl}/users/username/{username}
