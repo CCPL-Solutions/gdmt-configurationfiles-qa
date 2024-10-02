@@ -34,7 +34,7 @@ application:
     cross:
       userNotFound:
         code: GDMT_IMN_000
-        message: User not found in the system.
+        message: User not found.
     createUser:
       userAlreadyExists:
         code: GDMT_IMN_001
