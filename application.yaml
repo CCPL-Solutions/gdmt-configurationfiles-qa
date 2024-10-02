@@ -6,3 +6,26 @@ config:
         id: frontendapp
       jwt:
         key: algun_codigo_secreto_aeiou
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 10000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  # TODO: Remove this section when Distributed Tracing configuration is added
+  health:
+    rabbit:
+      enabled: false
+    binders:
+      enabled: false
