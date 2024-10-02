@@ -43,5 +43,5 @@ management:
 data-provider:
   rest:
     gdmt-ms-identitymanagement-neg:
-      baseUrl: http://gdmt-ms-identitymanagement-neg-re-v1-1/api/v1.1
+      baseUrl: http://gdmt-ms-identitymanagement-neg-re-v1-0/api/v1.0
       urlFindUserByUserName: ${data-provider.rest.gdmt-ms-identitymanagement-neg.baseUrl}/users/username/{username}
