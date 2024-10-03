@@ -1,0 +1,44 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    enabled: true
+    service-url:
+      defaultZone: http://gdmt-ms-eureka-server:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      show-sql: true
+  datasource:
+    url: ${gdmt.datasource.url}
+    username: ${gdmt.datasource.username}
+    password: ${gdmt.datasource.password}
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    baseUrl: http://gdmt-ms-zipkin-server:9411
+
+application:
+  errors:
+    cross:
+      documentTypeNotFound:
+        code: GDMT_RSN_000
+        message: Document type not found.
+      fieldNotFound:
+        code: GDMT_RSN_001
+        message: Field not found.
+    createDocumentType:
+      documentTypeAlreadyExists:
+        code: GDMT_RSN_002
+        message: Document type already exists.
