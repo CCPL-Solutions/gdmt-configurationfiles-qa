@@ -2,10 +2,10 @@ config:
   security:
     oauth:
       client:
-        secret: '12345'
-        id: frontendapp
+        id: ${oauth.client.id}
+        secret: ${oauth.client.secret}
       jwt:
-        key: algun_codigo_secreto_aeiou
+        key: ${oauth.jwt.key}
 
 hystrix:
   command:

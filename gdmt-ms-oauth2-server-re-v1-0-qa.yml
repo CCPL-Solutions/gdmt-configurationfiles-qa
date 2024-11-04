@@ -3,42 +3,18 @@ server:
 
 eureka:
   client:
-    serviceUrl:
+    enabled: true
+    service-url:
       defaultZone: http://gdmt-ms-eureka-server:8761/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 20000
-ribbon:
-  ConnectTimeout: 3000
-  ReadTimeout: 10000
-
 spring:
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      naming:
-        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      show-sql: true
-  datasource:
-    password: ${gdmt.datasource.password}
-    username: ${gdmt.datasource.username}
-    url: ${gdmt.datasource.url}
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    baseUrl: http://gdmt-ms-zipkin-server:9411
 
 data-provider:
   rest:
