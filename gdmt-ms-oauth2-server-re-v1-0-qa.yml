@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    enabled: true
+    service-url:
+      defaultZone: http://gdmt-ms-eureka-server:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+spring:
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    baseUrl: http://gdmt-ms-zipkin-server:9411
+
+data-provider:
+  rest:
+    gdmt-ms-identitymanagement-neg:
+      baseUrl: http://gdmt-ms-identitymanagement-neg-re-v1-0/api/v1.0
+      urlFindUserByUserName: ${data-provider.rest.gdmt-ms-identitymanagement-neg.baseUrl}/users/username/{username}
+      urlFindAllGroups: ${data-provider.rest.gdmt-ms-identitymanagement-neg.baseUrl}/groups
+      urlFindAllPermissions: ${data-provider.rest.gdmt-ms-identitymanagement-neg.baseUrl}/permissions

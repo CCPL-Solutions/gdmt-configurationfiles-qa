@@ -3,27 +3,24 @@ server:
 
 eureka:
   client:
-    serviceUrl:
+    enabled: true
+    service-url:
       defaultZone: http://gdmt-ms-eureka-server:8761/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 20000
-ribbon:
-  ConnectTimeout: 3000
-  ReadTimeout: 10000
 
 spring:
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  sleuth:
+    sampler:
+      probability: 1.0
+    web:
+      skipPattern: /
+  zipkin:
+    baseUrl: http://gdmt-ms-zipkin-server:9411
 
 zuul:
   routes:
@@ -43,3 +40,7 @@ zuul:
       service-id: gdmt-ms-oauth2-server
       path: /gdmt-ms-oauth2-server/**
       sensitive-headers: Cookie,Set-Cookie
+
+    gdmt-ms-frontendconfiguration-utl:
+      service-id: gdmt-ms-frontendconfiguration-utl
+      path: /gdmt-ms-frontendconfiguration-utl/**
