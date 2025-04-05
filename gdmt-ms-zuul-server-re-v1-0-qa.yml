@@ -40,3 +40,7 @@ zuul:
       service-id: gdmt-ms-oauth2-server
       path: /gdmt-ms-oauth2-server/**
       sensitive-headers: Cookie,Set-Cookie
+
+    gdmt-ms-frontendconfiguration-utl:
+      service-id: gdmt-ms-frontendconfiguration-utl
+      path: /gdmt-ms-frontendconfiguration-utl/**
