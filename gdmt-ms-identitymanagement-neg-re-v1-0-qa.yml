@@ -20,9 +20,9 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       show-sql: true
   datasource:
-    url: ${gdmt.datasource.url}
-    username: ${gdmt.datasource.username}
-    password: ${gdmt.datasource.password}
+    url: ${ms.datasource.url}
+    username: ${ms.datasource.username}
+    password: ${ms.datasource.password}
   sleuth:
     sampler:
       probability: 1.0
@@ -30,6 +30,8 @@ spring:
     baseUrl: http://gdmt-ms-zipkin-server:9411
 
 application:
+  identityTypeGroup: GROUP
+  identityTypeUser: USER
   errors:
     cross:
       userNotFound:
@@ -42,3 +44,21 @@ application:
       roleNotFound:
         code: GDMT_IMN_002
         message: Role not found.
+    changeUserPassword:
+      previousPasswordIncorrect:
+        code: GDMT_IMN_003
+        message: Previous password is incorrect.
+      newPasswordEqualsOldPassword:
+        code: GDMT_IMN_004
+        message: New password is the same as the old password.
+    createGroup:
+      groupAlreadyExists:
+        code: GDMT_IMN_005
+        message: Group already exists.
+      groupNotFound:
+        code: GDMT_IMN_006
+        message: Group not found.
+    setUpGroupPermission:
+      groupPermissionNotFound:
+        code: GDMT_IMN_007
+        message: Group permission %s not found.
