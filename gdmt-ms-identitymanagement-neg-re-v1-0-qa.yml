@@ -44,6 +44,9 @@ application:
       roleNotFound:
         code: GDMT_IMN_002
         message: Role not found.
+      emailAlreadyExists:
+        code: GDMT_IMN_008
+        message: Email already associated with another user.
     changeUserPassword:
       previousPasswordIncorrect:
         code: GDMT_IMN_003
